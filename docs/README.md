@@ -19,7 +19,7 @@ config:
           theme: alt
           text: Github →
           link: https://github.com/pengzhanbo/vuepress-theme-plume
-        -
+    -
      features:
       - 
         title: 响应式布局
