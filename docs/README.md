@@ -1,26 +1,11 @@
 ---
 pageLayout: home
 externalLinkIcon: false
+home: true
 config:
   -
-    type: hero
-    full: true
-    background: tint-plate
-    hero:
-      name: Theme Plume
-      tagline: VuePress Next Theme
-      text: 一个简约的，功能丰富的 vuepress 文档&博客 主题
-      actions:
-        -
-          theme: brand
-          text: 博客
-          link: /blog/
-        -
-          theme: alt
-          text: Github →
-          link: https://github.com/pengzhanbo/vuepress-theme-plume
-    -
-     features:
+    type: features
+    features:
       - 
         title: 响应式布局
         icon: 💻
@@ -57,5 +42,5 @@ config:
       -
         title: Markdown 增强
         icon: 📝
-        details: 支持 Markdown 语法，支持 代码块分组、提示容器、任务列表、数学公式、代码演示等     
+        details: 支持 Markdown 语法，支持 代码块分组、提示容器、任务列表、数学公式、代码演示等
 ---
