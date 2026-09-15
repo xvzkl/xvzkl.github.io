@@ -29,7 +29,7 @@ export default defineThemeConfig({
   readAid: 'left',
   footer: {
     message: '<span class="reg-icon-xvzk">®</span><span class="footer-xvzk"></span>',        // ← 替换"由 VuePress 和 ..."这一行
-    copyright: '© 2026 墨染残阳 | <span class="icp-icon-xvzk"></span> <a href="https://beian.miit.gov.cn/" target="_blank" style="color: var(--vp-c-text-2); font-size: 1em; font-weight: bold; text-decoration: none;">浙ICP备2024141841</a>',          // ← 第二行版权文字（可选）
+    copyright: '© 2026 墨染残阳 | <span class="icp-icon-xvzk"></span> <a href="https://beian.miit.gov.cn/" target="_blank" style="color: var(--vp-c-text-2); font-size: 1em; font-weight: bold; text-decoration: none;">海ICP备2026112341</a>',          // ← 第二行版权文字（可选）
   },
 
   social: [
