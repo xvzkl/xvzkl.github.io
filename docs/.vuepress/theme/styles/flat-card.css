@@ -1,0 +1,161 @@
+
+:root {
+  /* 明亮主题：黑色阴影 */
+  --flat-card-shadow-hover: rgba(0, 0, 0, 0.15);
+  --flat-card-shadow-active: rgba(0, 0, 0, 0.12);
+}
+
+html[data-theme="dark"] {
+  /* 暗色主题：白色阴影。
+   * 注意白色在深底上是「发光」而非「投影」，视觉强度远高于同透明度的黑色，
+   * 因此这里的 alpha 刻意压得比明亮主题低一档，避免出现刺眼的白色描边。
+   * 觉得不够明显就往上加，觉得太亮就继续往下压。 */
+  --flat-card-shadow-hover: rgba(255, 255, 255, 0.12);
+  --flat-card-shadow-active: rgba(255, 255, 255, 0.08);
+}
+
+/* ============ 扁平化基础样式 ============ */
+
+html[data-theme] .vp-home-feature.link {
+  background-color: transparent;            /* 扁平：去掉底色块 */
+  border: 1px solid var(--vp-c-border);     /* 扁平：细边框替代色块 */
+  border-radius: 8px;
+  box-shadow: none;                         /* 扁平：平时无阴影 */
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+/* ============ 悬停动画：浮起 + 阴影出现 ============ */
+
+html[data-theme] .vp-home-feature.link:hover {
+  border-color: var(--vp-c-border);         /* 显式锁定边框色，压掉主题的品牌色边框 */
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px var(--flat-card-shadow-hover);
+}
+
+/* 按下时轻微回落，增强点击反馈 */
+html[data-theme] .vp-home-feature.link:active {
+  border-color: var(--vp-c-border);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px var(--flat-card-shadow-active);
+  transition-duration: 0.1s;
+}
+
+/* ============ 尊重系统减弱动态效果设置 ============ */
+
+/* 选择器需与上方保持一致的权重，且位置靠后，才能覆盖掉悬停动效 */
+@media (prefers-reduced-motion: reduce) {
+  html[data-theme] .vp-home-feature.link {
+    transition: none;
+  }
+
+  html[data-theme] .vp-home-feature.link:hover {
+    transform: none;
+  }
+}
+
+/* ============ 标题锚点符号自定义 ============ */
+
+:root {
+  /* 图标与标题文字的距离（支持 em / px），改这里即可调整间距 */
+  --vp-header-anchor-offset: 1.15em;
+  /* 图片图标尺寸 */
+  --vp-header-anchor-size: 18px;
+}
+
+/* 扩大锚点的悬停区域：从文字延伸到图标最右侧，消除间隙处悬停图标消失的问题 */
+.vp-doc a.header-anchor {
+  padding-right: calc(var(--vp-header-anchor-offset) + var(--vp-header-anchor-size));
+  /* 负 margin 抵消占位，不影响标题排版 */
+  margin-right: calc(-1 * (var(--vp-header-anchor-offset) + var(--vp-header-anchor-size)));
+}
+
+/* 锚点图标：用 background-image 引用外部图片（svg / png 均可），尺寸 100% 可控 */
+.vp-doc a.header-anchor:only-child::before,
+.vp-doc a.header-anchor:only-child:focus-visible::before {
+  content: "";
+  display: inline-block;
+  width: var(--vp-header-anchor-size);
+  height: var(--vp-header-anchor-size);
+  /* 图片放到 .vuepress/public 目录，以 / 开头引用；换成 png 只需改文件名和扩展名 */
+  background: url('/link.svg') no-repeat center / contain;
+
+  /* 悬停区域扩大后，图标贴在元素最右侧（视觉位置与之前一致） */
+  left: auto;
+  right: 0;
+  /* 垂直方向相对标题居中 */
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* 深色模式切换为深色版图片 */
+[data-theme="dark"] .vp-doc a.header-anchor:only-child::before,
+[data-theme="dark"] .vp-doc a.header-anchor:only-child:focus-visible::before {
+  background-image: url('/link_dark.svg');
+}
+
+
+
+/* ============ 页脚头像组件 ============ */
+.footer-xvzk {
+  /* ===== 可调参数区 =====*/
+  --avatar-width: 100px;           /*头像宽度*/
+  --avatar-height: 50px;          /* 头像高度*/
+  --avatar-margin-left: 8px;    /* 距离左侧文字的距离*/
+  --avatar-vertical-align: middle; /* 垂直对齐方式：middle / top / bottom / -2px 等
+  ======================*/
+
+  display: inline-block;
+  width: var(--avatar-width);
+  height: var(--avatar-height);
+  margin-left: var(--avatar-margin-left);
+  vertical-align: var(--avatar-vertical-align);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  /* 亮色模式头像*/
+  content: url('/images/mr_profile_pic.svg');
+
+  /* 暗色模式头像（Plume 切换暗黑模式时会在 html 标签加 data-theme="dark"）*/
+  [data-theme="dark"] & {
+    content: url('/images/mr_profile_pic_dark.svg');
+  }
+}
+
+/* 注册图标*/
+.reg-icon-xvzk {
+  font-size: 2em; /* 1. 控制大小：em 代表相对当前文字的比例，0.85倍 */
+  margin-left: 2px;  /* 2. 增加左边距，避免和前面的 © 粘在一起 */
+  vertical-align: -0.3em; /* 3. 微调垂直位置，0.1em 表示稍微往下挪一点点 */
+  /* transform: translateY(-1px); 如果觉得还是偏高，取消注释这行往下微调 */
+}
+
+
+
+/*备案图标*/
+.icp-icon-xvzk {
+  /* ===== 可调参数区 =====*/
+  --icon-width: 20px;
+  --icon-height: 20px;
+  --icon-margin-bottom: -5px;
+  /* ======================*/
+
+  display: inline-block;
+  width: var(--icon-width);
+  height: var(--icon-height);
+  margin-bottom: var(--icon-margin-bottom);
+
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  
+/* 亮色模式下的图标*/
+  background-image: url('/images/icp-icon.svg');
+
+  /* 暗色模式下的图标*/
+  [data-theme="dark"] & {
+    background-image: url('/images/icp-icon-dark.svg');
+  }
+}
