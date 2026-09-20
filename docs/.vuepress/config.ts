@@ -28,5 +28,13 @@ export default defineUserConfig({
   bundler: viteBundler(),
   shouldPrefetch: false,
 
-  theme: plumeTheme(),
+  theme: plumeTheme({
+   // 内容加密配置
+    encrypt: {
+      // more options...
+    }
+
+}),
+
+  
 })
