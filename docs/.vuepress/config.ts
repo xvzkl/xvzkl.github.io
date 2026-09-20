@@ -14,6 +14,7 @@ import { defineUserConfig } from 'vuepress'
 import { plumeTheme } from 'vuepress-theme-plume'
 import path from 'node:path'
 
+
 export default defineUserConfig({
   base: '/',
   lang: 'zh-CN',
@@ -30,9 +31,19 @@ export default defineUserConfig({
 
   theme: plumeTheme({
    // 内容加密配置
-    encrypt: {
-      // more options...
-    }
+    markdown: {
+      encrypt: true, 
+    },
+
+    // 主题配置
+    collections: [ 
+      { type: 'doc', dir: '/demo/1.测试', title: '指南' }
+    ]
+    
+
+
+
+
 
 }),
 

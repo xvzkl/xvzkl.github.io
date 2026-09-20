@@ -41,9 +41,88 @@ const demoDoc = defineCollection({
   sidebar: ['', 'foo', 'bar'],
   // 根据文件结构自动生成侧边栏
   // sidebar: 'auto',
+  sidebarCollapsed: true, 
+})
+
+
+/**
+ * 「指南」文档集合：演示截图中那种 分组 + 图标 + 嵌套 + 折叠 的侧边栏。
+ * - 带 `items` 的条目渲染为可折叠分组（如「从这里开始」「写作」「功能」）
+ * - 同时带 `link` 和 `items` 的条目（如「集合」）既是页面又有子级
+ * - `collapsed: true` 让子分组默认收起（如「markdown」）
+ * - `link: '---'` 渲染为分组之间的分隔线
+ * - `icon` 使用 Iconify 图标名（集合:名称），也可用 / 开头的本地图片路径
+ */
+const guideDoc = defineCollection({
+  type: 'doc',
+  dir: 'guide',
+  linkPrefix: '/guide',
+  title: '指南',
+  sidebarCollapsed: false, // 顶层分组默认展开
+  sidebar: [
+    {
+      text: '从这里开始',
+      icon: 'mdi:lightbulb-on-outline',
+      items: [
+        { text: '主题介绍', link: 'intro', icon: 'mdi:text-box-outline' },
+        { text: '安装与使用', link: 'install', icon: 'mdi:layers-outline' },
+        { text: '项目结构', link: 'structure', icon: 'mdi:file-tree-outline' },
+        {
+          text: '集合',
+          link: 'collection',
+          icon: 'mdi:view-grid-plus-outline',
+          items: [
+            { text: 'post 集合', link: 'collection-post', icon: 'mdi:post-outline' },
+            { text: 'doc 集合', link: 'collection-doc', icon: 'mdi:file-document-outline' },
+          ],
+        },
+        { text: '侧边栏', link: 'sidebar', icon: 'mdi:dock-left' },
+        { text: '编写文章', link: 'write', icon: 'mdi:note-edit-outline' },
+        { text: 'frontmatter', link: 'frontmatter', icon: 'mdi:code-json' },
+        { text: '国际化', link: 'i18n', icon: 'mdi:web' },
+        { text: '部署', link: 'deploy', icon: 'mdi:rocket-outline' },
+        { text: '构建优化', link: 'build', icon: 'mdi:package-variant-closed' },
+      ],
+    },
+    {
+      text: '写作',
+      icon: 'mdi:pencil-ruler',
+      prefix: '/writing',
+      items: [
+        {
+          text: 'markdown',
+          icon: 'mdi:markdown-outline',
+          prefix: 'markdown',
+          collapsed: true, // 默认折叠，显示为右箭头，点击展开
+          items: [
+            { text: '基础语法', link: 'basic' },
+            { text: '扩展语法', link: 'extend' },
+          ],
+        },
+        { text: '代码块', link: 'code-block', icon: 'mdi:code-tags' },
+        { text: '代码演示', link: 'code-demo', icon: 'mdi:monitor' },
+        { text: '图表', link: 'chart', icon: 'mdi:chart-line' },
+        { text: '资源嵌入', link: 'embed', icon: 'mdi:play-box-multiple-outline' },
+      ],
+    },
+    { text: '分隔线', link: '---' }, // 分组之间的水平分隔线
+    {
+      text: '功能',
+      icon: 'mdi:cube-outline',
+      prefix: '/features',
+      items: [
+        { text: '图标', link: 'icons', icon: 'mdi:emoticon-happy-outline' },
+        { text: '内容搜索', link: 'search', icon: 'mdi:magnify' },
+        { text: '图片预览', link: 'image-preview', icon: 'mdi:image-outline' },
+        { text: '评论', link: 'comments', icon: 'mdi:comment-text-outline' },
+        { text: '公告板', link: 'announcement', icon: 'mdi:bullhorn-outline' },
+      ],
+    },
+  ],
 })
 
 export default defineCollections([
   blog,
   demoDoc,
+  guideDoc,
 ])

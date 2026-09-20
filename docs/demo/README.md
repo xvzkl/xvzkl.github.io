@@ -6,3 +6,7 @@ permalink: /demo/
 
 - [bar](./bar.md)
 - [foo](./foo.md)
+
+::: encrypt password="111"
+这是加密的内容
+:::
