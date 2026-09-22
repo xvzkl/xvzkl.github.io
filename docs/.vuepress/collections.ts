@@ -63,6 +63,7 @@ const guideDoc = defineCollection({
     {
       text: '从这里开始',
       icon: 'mdi:lightbulb-on-outline',
+      collapsed: true, // 默认折叠，显示为右箭头，点击展开
       items: [
         { text: '主题介绍', link: 'intro', icon: 'mdi:text-box-outline' },
         { text: '安装与使用', link: 'install', icon: 'mdi:layers-outline' },

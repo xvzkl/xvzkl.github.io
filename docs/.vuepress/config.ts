@@ -33,6 +33,7 @@ export default defineUserConfig({
    // 内容加密配置
     markdown: {
       encrypt: true, 
+<<<<<<< HEAD
     },
 
     // 主题配置
@@ -44,6 +45,9 @@ export default defineUserConfig({
 
 
 
+=======
+    }
+>>>>>>> 0118d18e772b8142de993d5ca8400a76deb78d98
 
 }),
 
